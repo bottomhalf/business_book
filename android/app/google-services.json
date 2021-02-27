@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "464377476675",
+    "firebase_url": "https://lightup-9afa2.firebaseio.com",
+    "project_id": "lightup-9afa2",
+    "storage_bucket": "lightup-9afa2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:464377476675:android:eb97e4d4004da6e0d606f6",
+        "android_client_info": {
+          "package_name": "com.bottomhalf.shop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "464377476675-i8r606dg1m9tf969qh9f88pe8m47inlh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSz0TgKvMuVzQ6v3NZgsy9lgBVjwihac4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "464377476675-i8r606dg1m9tf969qh9f88pe8m47inlh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
