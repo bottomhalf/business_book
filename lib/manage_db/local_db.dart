@@ -14,38 +14,21 @@ class LocalDb {
   static LocalDb get instance => _instance;
 
   Future<Database> get getDb async {
-    if(dbComplete == null) {
+    if (dbComplete == null) {
       dbComplete = Completer();
-      if(dbComplete != null)
-        setUpDb();
+      if (dbComplete != null) setUpDb();
     }
     return dbComplete.future;
   }
 
-  Future<void>  setUpDb() async {
+  Future<void> setUpDb() async {
     var dir = await getApplicationDocumentsDirectory();
     await dir.create(recursive: true);
     final dbpath = p.join(dir.path, 'bh_shop.db');
     print('Db path: ${dbpath}');
 
     final database = await databaseFactoryIo.openDatabase(dbpath);
-    if(dbComplete == null)
-      dbComplete = Completer();
+    if (dbComplete == null) dbComplete = Completer();
     dbComplete.complete(database);
-  }
-
-  void add() async {
-    dynamic database;
-    var store = intMapStoreFactory.store('shop');
-
-    var key = await store.add(database, {'name': 'ugly'});
-    var record = await store.record(key).getSnapshot(database);
-    record =
-    (await store.find(database, finder: Finder(filter: Filter.byKey(record.key))))
-        .first;
-    print(record);
-    var records = (await store.find(database,
-    finder: Finder(filter: Filter.matches('name', '^ugly'))));
-    print(records);
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class PageHeader extends StatefulWidget implements PreferredSizeWidget {
   String pageTitle = "Home";
@@ -18,8 +19,19 @@ class _PageHeaderState extends State<PageHeader> {
   Widget build(BuildContext context) {
     return PreferredSize(
       child: AppBar(
-        title: Text(widget.pageTitle),
-        backgroundColor: Colors.redAccent,
+        title: Row(children: [
+          Container(
+            margin: EdgeInsets.fromLTRB(0, 0, 10, 0),
+          ),
+          Text(
+            widget.pageTitle,
+            style: TextStyle(
+              color: Colors.black87,
+            ),
+          ),
+        ]),
+        backgroundColor: Colors.white,
+        iconTheme: IconThemeData(color: Colors.black87),
       ),
     );
   }
