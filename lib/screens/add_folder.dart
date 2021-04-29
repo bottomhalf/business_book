@@ -32,7 +32,6 @@ class _AddFolderState extends State<AddFolder> {
   String lastError = '';
   String lastStatus = '';
   String _currentLocaleId = '';
-  int resultListened = 0;
   List<LocaleName> _localeNames = [];
 
   bool isUpdate = false;
@@ -135,11 +134,11 @@ class _AddFolderState extends State<AddFolder> {
   }
 
   Future<void> initSpeechState() async {
-    var hasSpeech = await speech.initialize(
-        onError: errorListener,
-        onStatus: statusListener,
-        debugLogging: true,
-        finalTimeout: Duration(milliseconds: 0));
+    var hasSpeech =
+        await speech.initialize(onError: errorListener, onStatus: statusListener
+            //debugLogging: true,
+            //finalTimeout: Duration(milliseconds: 0)
+            );
     if (hasSpeech) {
       _localeNames = await speech.locales();
 
@@ -177,11 +176,11 @@ class _AddFolderState extends State<AddFolder> {
     lastError = '';
     speech.listen(
         onResult: resultListener,
-        listenFor: Duration(seconds: 5),
-        pauseFor: Duration(seconds: 5),
-        partialResults: false,
+        listenFor: Duration(minutes: 5),
+        //pauseFor: Duration(seconds: 2),
+        //partialResults: false,
         localeId: _currentLocaleId,
-        onSoundLevelChange: soundLevelListener,
+        //onSoundLevelChange: soundLevelListener,
         cancelOnError: true,
         listenMode: ListenMode.confirmation);
     setState(() {});
@@ -204,17 +203,19 @@ class _AddFolderState extends State<AddFolder> {
   }
 
   void resultListener(SpeechRecognitionResult result) {
-    ++resultListened;
-    print('Result listener $resultListened');
+    print('Result listener ${result.recognizedWords}');
     setState(() {
       lastWords = '${result.recognizedWords} - ${result.finalResult}';
     });
+
+    print('${result.recognizedWords} - ${result.finalResult}');
+    this._folderDescription.text = result.recognizedWords;
   }
 
   void soundLevelListener(double level) {
     minSoundLevel = min(minSoundLevel, level);
     maxSoundLevel = max(maxSoundLevel, level);
-    // print("sound level $level: $minSoundLevel - $maxSoundLevel ");
+    //print("sound level $level: $minSoundLevel - $maxSoundLevel ");
     setState(() {
       this.level = level;
     });
